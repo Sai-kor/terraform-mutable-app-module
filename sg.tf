@@ -4,9 +4,9 @@ resource "aws_security_group" "sg" {
   vpc_id      = data.terraform_remote_state.vpc.outputs.VPC_ID
 
   ingress {
-    description      = "HTTP"
-    from_port        = 80
-    to_port          = 80
+    description      = "APP"
+    from_port        = var.APP_PORT
+    to_port          = var.APP_PORT
     protocol         = "tcp"
     cidr_blocks      = data.terraform_remote_state.vpc.outputs.PRIVATE_CIDR
   }
