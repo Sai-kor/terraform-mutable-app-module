@@ -1,7 +1,9 @@
 ## this null resource do nothing , but we give provisioner , provisioner is one which is going to help you to connect to ec2 instances/linux instances by providing required information.It can connect to the instances and execute the commands
 resource "null_resource" "app-deploy" {
   triggers = {
-    instance_ids = join(",",aws_spot_instance_request.ec2-spot.*.spot_instance_id) //expects string so here list to string terraform so using join.
+    instance_ids = join(",",aws_spot_instance_request.ec2-spot.*.spot_instance_id)
+    //expects string so here list to string terraform so using join.
+    app_version = var.APP_VERSION
   }
   count = length(aws_spot_instance_request.ec2-spot)
   connection {
