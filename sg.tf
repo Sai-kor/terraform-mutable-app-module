@@ -8,7 +8,7 @@ resource "aws_security_group" "sg" {
     from_port        = var.APP_PORT
     to_port          = var.APP_PORT
     protocol         = "tcp"
-    cidr_blocks      = data.terraform_remote_state.vpc.outputs.PRIVATE_CIDR
+    cidr_blocks      = var.APP_PORT == 80 ? data.terraform_remote_state.vpc.outputs.VPC_CIDR : data.terraform_remote_state.vpc.outputs.PRIVATE_CIDR
   }
 
   ingress {
