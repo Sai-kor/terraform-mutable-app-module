@@ -19,6 +19,14 @@ resource "aws_security_group" "sg" {
     cidr_blocks      = concat(data.terraform_remote_state.vpc.outputs.PRIVATE_CIDR,tolist([data.terraform_remote_state.vpc.outputs.DEFAULT_VPC_CIDR]))
   }
 
+  ingress {
+    description      = "PROMETHEUS"
+    from_port        = 9100
+    to_port          = 9100
+    protocol         = "tcp"
+    cidr_blocks      = concat(data.terraform_remote_state.vpc.outputs.PRIVATE_CIDR,tolist([data.terraform_remote_state.vpc.outputs.DEFAULT_VPC_CIDR]))
+  }
+
   egress {
     from_port        = 0
     to_port          = 0
